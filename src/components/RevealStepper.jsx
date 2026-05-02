@@ -1,20 +1,22 @@
 import { useState } from 'react'
 import { ChevronRight, Eye, RotateCcw, Video } from 'lucide-react'
 import VideoEmbed from './VideoEmbed.jsx'
+import ChoiceWidget from './ChoiceWidget.jsx'
+import ChecklistWidget from './ChecklistWidget.jsx'
 
 const stepConfig = {
-  info:     { bg:'bg-blue-50',   border:'border-blue-300',   label:'Información',       dot:'bg-blue-500'    },
-  question: { bg:'bg-orange-50', border:'border-orange-300', label:'Pregunta',          dot:'bg-orange-500'  },
-  answer:   { bg:'bg-green-50',  border:'border-green-400',  label:'Respuesta',         dot:'bg-green-500'   },
-  error:    { bg:'bg-red-50',    border:'border-red-400',    label:'Error identificado',dot:'bg-red-500'     },
-  correct:  { bg:'bg-teal-50',   border:'border-teal-400',   label:'Conducta correcta', dot:'bg-teal-500'    },
-  analysis: { bg:'bg-purple-50', border:'border-purple-400', label:'Análisis docente',  dot:'bg-purple-500'  },
-  video:    { bg:'bg-gray-900',  border:'border-gray-700',   label:'Video',             dot:'bg-red-500'     },
+  info:      { bg:'bg-blue-50',   border:'border-blue-300',   label:'Información',       dot:'bg-blue-500'    },
+  question:  { bg:'bg-orange-50', border:'border-orange-300', label:'Pregunta',          dot:'bg-orange-500'  },
+  answer:    { bg:'bg-green-50',  border:'border-green-400',  label:'Respuesta',         dot:'bg-green-500'   },
+  error:     { bg:'bg-red-50',    border:'border-red-400',    label:'Error identificado',dot:'bg-red-500'     },
+  correct:   { bg:'bg-teal-50',   border:'border-teal-400',   label:'Conducta correcta', dot:'bg-teal-500'    },
+  analysis:  { bg:'bg-purple-50', border:'border-purple-400', label:'Análisis docente',  dot:'bg-purple-500'  },
+  video:     { bg:'bg-gray-900',  border:'border-gray-700',   label:'Video',             dot:'bg-red-500'     },
+  choice:    { bg:'bg-orange-50', border:'border-orange-200', label:'Opción múltiple',   dot:'bg-orange-500'  },
+  checklist: { bg:'bg-blue-50',   border:'border-blue-200',   label:'Checklist',         dot:'bg-blue-500'    },
 }
 
 function Step({ step, index }) {
-  const cfg = stepConfig[step.type] || stepConfig.info
-
   if (step.type === 'video') {
     return (
       <div className="rounded-xl overflow-hidden animate-slide-up">
@@ -40,6 +42,29 @@ function Step({ step, index }) {
     )
   }
 
+  if (step.type === 'choice') {
+    return (
+      <div className="animate-slide-up">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-xs text-gray-400">Paso {index + 1}</span>
+        </div>
+        <ChoiceWidget title={step.title} options={step.options} />
+      </div>
+    )
+  }
+
+  if (step.type === 'checklist') {
+    return (
+      <div className="animate-slide-up">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-xs text-gray-400">Paso {index + 1}</span>
+        </div>
+        <ChecklistWidget title={step.title} items={step.items} feedback={step.feedback} />
+      </div>
+    )
+  }
+
+  const cfg = stepConfig[step.type] || stepConfig.info
   const items = Array.isArray(step.content) ? step.content : [step.content]
   return (
     <div className={`rounded-xl border-l-4 ${cfg.bg} ${cfg.border} p-4 animate-slide-up`}>
@@ -61,6 +86,14 @@ function Step({ step, index }) {
   )
 }
 
+function isPlaceholder(step) {
+  if (step.type === 'video') return false
+  if (step.type === 'choice') return false
+  if (step.type === 'checklist') return false
+  const text = Array.isArray(step.content) ? step.content[0] : step.content
+  return text?.toString().startsWith('(Completar')
+}
+
 export default function RevealStepper({ steps = [] }) {
   const [current, setCurrent] = useState(0)
   const [showAll, setShowAll] = useState(false)
@@ -68,10 +101,7 @@ export default function RevealStepper({ steps = [] }) {
   const revealed = showAll ? steps : steps.slice(0, current + 1)
   const isComplete = current >= steps.length - 1
 
-  const placeholderMode = steps.every(s =>
-    s.type !== 'video' &&
-    (Array.isArray(s.content) ? s.content[0] : s.content)?.toString().startsWith('(Completar')
-  )
+  const placeholderMode = steps.every(isPlaceholder)
 
   if (placeholderMode) {
     return (
@@ -90,10 +120,10 @@ export default function RevealStepper({ steps = [] }) {
         <span>{showAll ? 'Todos los pasos' : `Paso ${Math.min(current + 1, steps.length)} de ${steps.length}`}</span>
         <div className="flex gap-1">
           {steps.map((s, i) => (
-            <div key={i} className={`transition-all rounded-full
-              ${s.type === 'video' ? 'w-3' : 'w-2'} h-2
+            <div key={i} className={`transition-all rounded-full h-2
+              ${s.type === 'video' ? 'w-3' : s.type === 'choice' || s.type === 'checklist' ? 'w-3' : 'w-2'}
               ${i <= current || showAll
-                ? s.type === 'video' ? 'bg-red-500' : 'bg-red-400'
+                ? s.type === 'video' ? 'bg-red-500' : s.type === 'choice' ? 'bg-orange-400' : s.type === 'checklist' ? 'bg-blue-400' : 'bg-red-400'
                 : 'bg-gray-200'}`}
             />
           ))}
