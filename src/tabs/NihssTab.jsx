@@ -10,7 +10,7 @@ export default function NihssTab() {
         <p className="text-sm text-gray-600 leading-relaxed">
           El NIHSS cuantifica el déficit neurológico de forma rápida y reproducible. En el contexto del clínico, su valor
           principal es doble: <strong>comunicar al equipo de stroke en un lenguaje estandarizado</strong> y anticipar si
-          hay oclusión de gran vaso (NIHSS ≥ 6 → candidato a trombectomía). Un NIHSS alto no contraindica trombólisis,
+          hay oclusión de gran vaso (NIHSS alto → sospecha de OGV). Un NIHSS alto no contraindica trombólisis,
           y un NIHSS bajo no la excluye.
         </p>
         <div className="mt-3 grid grid-cols-2 sm:grid-cols-5 gap-2 text-xs text-center">
@@ -23,12 +23,7 @@ export default function NihssTab() {
         </div>
       </SlideCard>
       <NihssCalc />
-      <SlideCard accent="gray">
-        <p className="text-xs text-gray-500 italic">
-          Nota docente: No se espera que memoricen todos los ítems hoy. El objetivo es que puedan calcular un NIHSS
-          básico y comunicarlo al neurólogo de guardia. Practicar con el equipo de enfermería.
-        </p>
-      </SlideCard>
+
     </div>
   )
 }
