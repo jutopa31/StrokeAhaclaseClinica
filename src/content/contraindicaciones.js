@@ -1,0 +1,30 @@
+export const contraindicaciones = [
+  { situacion:'Disección arterial extracraneana', categoria:'tratar', detalle:'El riesgo de hemorragia local es bajo. No contraindica. Cambio relevante respecto a guías previas.' },
+  { situacion:'Neoplasia extra-axial (meningioma, schwannoma)', categoria:'tratar', detalle:'No contraindica. Solo los tumores intra-axiales representan mayor riesgo.' },
+  { situacion:'Aneurisma intracraneal no roto', categoria:'tratar', detalle:'El riesgo de rotura con trombolítico es mínimo. Cambio importante en AHA 2026.' },
+  { situacion:'Historia remota de sangrado GI o GU', categoria:'tratar', detalle:'El antecedente remoto sin sangrado activo no contraindica.' },
+  { situacion:'Historia remota de infarto de miocardio', categoria:'tratar', detalle:'No contraindica salvo IAM muy reciente (ver categoría individualizar).' },
+  { situacion:'Stroke mimic (imitador de ACV)', categoria:'tratar', detalle:'Si la probabilidad clínica de ACV es alta, se puede trombolizar. El riesgo de complicación hemorrágica en stroke mimic es bajo.' },
+  { situacion:'Discapacidad previa o fragilidad', categoria:'individualizar', detalle:'Evaluar calidad de vida basal y expectativas del paciente y familia. Considerar potencial de recuperación.' },
+  { situacion:'DOACs < 48 horas', categoria:'individualizar', detalle:'Si la última dosis fue < 48 hs, el riesgo hemorrágico es mayor. Evaluar nivel plasmático si disponible.' },
+  { situacion:'ACV isquémico previo < 3 meses', categoria:'individualizar', detalle:'Depende del tamaño del infarto previo y del déficit potencial actual. ACV minor previo: menor riesgo.' },
+  { situacion:'Antecedente de hemorragia intracraneal', categoria:'individualizar', detalle:'Evaluar mecanismo: lobar (angiopatía amiloide, mayor riesgo) vs profundo (HTA, menor riesgo relativo).' },
+  { situacion:'Cirugía mayor < 10 días o neurocirugía 14 d–3 meses', categoria:'individualizar', detalle:'El riesgo de sangrado en el sitio quirúrgico debe ser ponderado contra el déficit neurológico.' },
+  { situacion:'Sangrado GI o GU < 21 días', categoria:'individualizar', detalle:'Sangrado reciente activo eleva el riesgo. Evaluar con endoscopía reciente o tratamiento en curso.' },
+  { situacion:'IAM con elevación del ST reciente', categoria:'individualizar', detalle:'Puede tratarse simultáneamente con coordinación cardiológica.' },
+  { situacion:'Disección intracraneal o MAV no rota', categoria:'individualizar', detalle:'Riesgo de sangrado intracraneal mayor que en aneurisma. Decisión individual.' },
+  { situacion:'Hemorragia en TC de cerebro', categoria:'evitar', detalle:'Contraindicación absoluta. El trombolítico expande el sangrado con consecuencias fatales.' },
+  { situacion:'Hipodensidad extensa y clara en TC', categoria:'evitar', detalle:'Infarto establecido > 1/3 del territorio de ACM. Riesgo de transformación hemorrágica supera al beneficio.' },
+  { situacion:'TBI grave o neurocirugía < 14 días', categoria:'evitar', detalle:'Riesgo de sangrado intracraneal inaceptablemente alto en el período agudo.' },
+  { situacion:'Lesión medular espinal aguda', categoria:'evitar', detalle:'Contraindicación por riesgo de hemorragia en el sitio de lesión.' },
+  { situacion:'Tumor cerebral intra-axial', categoria:'evitar', detalle:'Alto riesgo de sangrado intratumoral con consecuencias graves.' },
+  { situacion:'Coagulopatía severa (plaquetas < 100.000 o INR > 1.7)', categoria:'evitar', detalle:'Riesgo hemorrágico inaceptable sin corrección previa.' },
+  { situacion:'Disección aórtica', categoria:'evitar', detalle:'El trombolítico puede extender la disección con consecuencias catastróficas.' },
+  { situacion:'Endocarditis infecciosa activa', categoria:'evitar', detalle:'Alto riesgo de hemorragia por aneurismas micóticos.' },
+]
+
+export const categoriaConfig = {
+  tratar:        { label:'Beneficio > Riesgo',  bg:'bg-green-50',  border:'border-green-200', badge:'bg-green-100 text-green-700',  dot:'bg-green-500'  },
+  individualizar:{ label:'Individualizar',       bg:'bg-orange-50', border:'border-orange-200',badge:'bg-orange-100 text-orange-700',dot:'bg-orange-500' },
+  evitar:        { label:'Riesgo > Beneficio',   bg:'bg-red-50',    border:'border-red-200',   badge:'bg-red-100 text-red-700',     dot:'bg-red-500'    },
+}
