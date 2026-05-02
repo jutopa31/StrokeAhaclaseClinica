@@ -3,6 +3,7 @@ import { ChevronRight, Eye, RotateCcw, Video } from 'lucide-react'
 import VideoEmbed from './VideoEmbed.jsx'
 import ChoiceWidget from './ChoiceWidget.jsx'
 import ChecklistWidget from './ChecklistWidget.jsx'
+import FindingsWidget from './FindingsWidget.jsx'
 
 const stepConfig = {
   info:      { bg:'bg-blue-50',   border:'border-blue-300',   label:'Información',       dot:'bg-blue-500'    },
@@ -14,6 +15,7 @@ const stepConfig = {
   video:     { bg:'bg-gray-900',  border:'border-gray-700',   label:'Video',             dot:'bg-red-500'     },
   choice:    { bg:'bg-orange-50', border:'border-orange-200', label:'Opción múltiple',   dot:'bg-orange-500'  },
   checklist: { bg:'bg-blue-50',   border:'border-blue-200',   label:'Checklist',         dot:'bg-blue-500'    },
+  findings:  { bg:'bg-amber-50',  border:'border-amber-300',  label:'Estudios',           dot:'bg-amber-500'   },
 }
 
 function Step({ step, index }) {
@@ -64,8 +66,54 @@ function Step({ step, index }) {
     )
   }
 
+  if (step.type === 'findings') {
+    return (
+      <div className="animate-slide-up">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-xs text-gray-400">Paso {index + 1}</span>
+        </div>
+        <FindingsWidget findings={step.findings} title={step.title} />
+      </div>
+    )
+  }
+
   const cfg = stepConfig[step.type] || stepConfig.info
   const items = Array.isArray(step.content) ? step.content : [step.content]
+
+  // Enhanced info step with paciente hero card
+  if (step.type === 'info' && step.paciente) {
+    return (
+      <div className="rounded-xl border-l-4 border-blue-400 bg-blue-50 p-5 animate-slide-up shadow-sm">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0" />
+          <span className="text-xs font-semibold uppercase tracking-widest text-blue-600">Presentación</span>
+          <span className="text-xs text-gray-400 ml-auto">Paso {index + 1}</span>
+        </div>
+        <h4 className="font-display text-lg text-gray-900 mb-3">{step.title}</h4>
+        <div className="flex flex-wrap gap-2 mb-4">
+          <span className="text-xs font-semibold bg-blue-600 text-white px-3 py-1 rounded-full">
+            {step.paciente.nombre}
+          </span>
+          <span className="text-xs font-medium bg-blue-100 text-blue-800 border border-blue-200 px-3 py-1 rounded-full">
+            {step.paciente.antecedentes}
+          </span>
+        </div>
+        <div className="bg-white border border-blue-200 rounded-lg px-4 py-3 mb-3">
+          <p className="text-xs font-semibold text-blue-600 uppercase tracking-wide mb-1">Motivo de consulta</p>
+          <p className="text-sm font-medium text-gray-800">{step.paciente.motivo}</p>
+        </div>
+        <div className="space-y-2">
+          {items.map((item, i) => (
+            <p key={i} className="text-sm text-gray-700 flex gap-2.5">
+              <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0" />
+              {item}
+            </p>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className={`rounded-xl border-l-4 ${cfg.bg} ${cfg.border} p-4 animate-slide-up`}>
       <div className="flex items-center gap-2 mb-2">
@@ -90,6 +138,7 @@ function isPlaceholder(step) {
   if (step.type === 'video') return false
   if (step.type === 'choice') return false
   if (step.type === 'checklist') return false
+  if (step.type === 'findings') return false
   const text = Array.isArray(step.content) ? step.content[0] : step.content
   return text?.toString().startsWith('(Completar')
 }
@@ -121,9 +170,9 @@ export default function RevealStepper({ steps = [] }) {
         <div className="flex gap-1">
           {steps.map((s, i) => (
             <div key={i} className={`transition-all rounded-full h-2
-              ${s.type === 'video' ? 'w-3' : s.type === 'choice' || s.type === 'checklist' ? 'w-3' : 'w-2'}
+              ${s.type === 'video' ? 'w-3' : s.type === 'choice' || s.type === 'checklist' || s.type === 'findings' ? 'w-3' : 'w-2'}
               ${i <= current || showAll
-                ? s.type === 'video' ? 'bg-red-500' : s.type === 'choice' ? 'bg-orange-400' : s.type === 'checklist' ? 'bg-blue-400' : 'bg-red-400'
+                ? s.type === 'video' ? 'bg-red-500' : s.type === 'choice' ? 'bg-orange-400' : s.type === 'checklist' ? 'bg-blue-400' : s.type === 'findings' ? 'bg-amber-400' : 'bg-red-400'
                 : 'bg-gray-200'}`}
             />
           ))}
