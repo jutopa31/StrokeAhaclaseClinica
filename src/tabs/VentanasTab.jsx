@@ -12,7 +12,7 @@ export default function VentanasTab() {
       <SectionHeader num="3" title="Ventanas terapéuticas" subtitle="Tiempo = cerebro" />
       <SlideCard accent="red">
         <p className="text-sm text-gray-700 leading-relaxed">
-          En un ACV por oclusión de gran vaso se pierden <strong>1.9 millones de neuronas por minuto</strong> sin tratamiento.
+          En un ACV se pierden <strong>1.9 millones de neuronas por minuto</strong> sin tratamiento.
           Cada 15 minutos de demora equivalen, en promedio, a un mes de vida independiente perdido.
         </p>
       </SlideCard>
