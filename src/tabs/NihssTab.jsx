@@ -23,12 +23,7 @@ export default function NihssTab() {
         </div>
       </SlideCard>
       <NihssCalc />
-      <SlideCard accent="gray">
-        <p className="text-xs text-gray-500 italic">
-          Nota docente: No se espera que memoricen todos los ítems hoy. El objetivo es que puedan calcular un NIHSS
-          básico y comunicarlo al neurólogo de guardia. Practicar con el equipo de enfermería.
-        </p>
-      </SlideCard>
+
     </div>
   )
 }
