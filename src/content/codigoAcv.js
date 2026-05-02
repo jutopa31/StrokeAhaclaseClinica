@@ -12,7 +12,7 @@ export const protocolSteps = [
     items:['TC de cerebro SIN contraste: excluye hemorragia, habilita trombólisis'],
     alert:null},
   { id:5, time:'≤ 45 min', title:'Evaluación neurológica + decisión',
-    items:['NIHSS completo: puntaje y categoría de severidad','Verificar: hora de inicio, TA, glucemia, anticoagulantes, cirugías recientes','Confirmar ausencia de contraindicaciones absolutas','Decisión de trombólisis: neurólogo de stroke + médico de guardia'],
+    items:['NIHSS completo: puntaje y categoría de severidad','Verificar: hora de inicio, TA, glucemia, anticoagulantes, cirugías recientes','Confirmar ausencia de contraindicaciones absolutas','¿Hay síntomas discapacitantes?'],
     alert:null},
   { id:6, time:'≤ 60 min', title:'Door-to-needle',
     items:['Ajustar TA si > 185/110 mmHg antes de administrar (nicardipina o labetalol IV)','rtPA: 0.9 mg/kg IV (máx 90 mg) — 10% bolo, 90% en 60 min','TNK: 0.25 mg/kg IV (máx 25 mg) — bolo único en 5–10 segundos','Durante infusión: TA cada 15 min, sin punciones arteriales, sin SNG ni sonda vesical'],
