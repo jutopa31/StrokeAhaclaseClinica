@@ -4,19 +4,30 @@ import NihssTab from './tabs/NihssTab.jsx'
 import CodigoAcvTab from './tabs/CodigoAcvTab.jsx'
 import VentanasTab from './tabs/VentanasTab.jsx'
 import ContraindicacionesTab from './tabs/ContraindicacionesTab.jsx'
-import CasoClinico1Tab from './tabs/CasoClinico1Tab.jsx'
-import CasoClinico2Tab from './tabs/CasoClinico2Tab.jsx'
+import CasoClinicoTab from './tabs/CasoClinicoTab.jsx'
 import MensajesClaveTab from './tabs/MensajesClaveTab.jsx'
+import { casos } from './content/casos.js'
 
-const tabs = [
-  { id:'nihss',   path:'/nihss',   label:'NIHSS',           shortLabel:'NIHSS'    },
-  { id:'codigo',  path:'/codigo',  label:'Código ACV',      shortLabel:'Código'   },
-  { id:'ventanas',path:'/ventanas',label:'Ventanas',        shortLabel:'Ventanas' },
-  { id:'contra',  path:'/contra',  label:'Contraindicaciones',shortLabel:'Contrain.'},
-  { id:'caso1',   path:'/caso1',   label:'Caso 1',          shortLabel:'Caso 1'   },
-  { id:'caso2',   path:'/caso2',   label:'Caso 2',          shortLabel:'Caso 2'   },
-  { id:'mensajes',path:'/mensajes',label:'Mensajes clave',  shortLabel:'Claves'   },
+const staticTabs = [
+  { id:'nihss',    path:'/nihss',    label:'NIHSS',           shortLabel:'NIHSS'     },
+  { id:'codigo',   path:'/codigo',   label:'Código ACV',      shortLabel:'Código'    },
+  { id:'ventanas', path:'/ventanas', label:'Ventanas',        shortLabel:'Ventanas'  },
+  { id:'contra',   path:'/contra',   label:'Contraindicaciones', shortLabel:'Contrain.' },
 ]
+
+const casoTabs = casos.map((c, i) => ({
+  id: c.id,
+  path: `/${c.id}`,
+  label: c.titulo,
+  shortLabel: `Caso ${i + 1}`,
+}))
+
+const mensajesTab = { id:'mensajes', path:'/mensajes', label:'Mensajes clave', shortLabel:'Claves' }
+
+const tabs = [...staticTabs, ...casoTabs, mensajesTab]
+
+// Numeric offset for SectionHeader — static tabs occupy 1-4
+const casoOffset = staticTabs.length + 1
 
 export default function App() {
   return (
@@ -35,12 +46,17 @@ export default function App() {
         <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-6">
           <Routes>
             <Route path="/" element={<Navigate to="/nihss" replace />} />
-            <Route path="/nihss"   element={<NihssTab />} />
-            <Route path="/codigo"  element={<CodigoAcvTab />} />
+            <Route path="/nihss"    element={<NihssTab />} />
+            <Route path="/codigo"   element={<CodigoAcvTab />} />
             <Route path="/ventanas" element={<VentanasTab />} />
-            <Route path="/contra"  element={<ContraindicacionesTab />} />
-            <Route path="/caso1"   element={<CasoClinico1Tab />} />
-            <Route path="/caso2"   element={<CasoClinico2Tab />} />
+            <Route path="/contra"   element={<ContraindicacionesTab />} />
+            {casos.map((caso, i) => (
+              <Route
+                key={caso.id}
+                path={`/${caso.id}`}
+                element={<CasoClinicoTab caso={caso} num={casoOffset + i} />}
+              />
+            ))}
             <Route path="/mensajes" element={<MensajesClaveTab />} />
           </Routes>
         </main>
