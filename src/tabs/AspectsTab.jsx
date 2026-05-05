@@ -63,32 +63,22 @@ export default function AspectsTab() {
 
       {/* Imágenes */}
       <SlideCard accent="gray" title="Regiones del ASPECTS en TC">
-        <p className="text-xs text-gray-500 mb-3">Nivel de ganglios basales (izq.) · Nivel supraganglionar (der.)</p>
-        <div className="grid grid-cols-2 gap-3">
-          {['/Aspect1', '/Aspect2'].map((base, i) => {
-            const exts = ['jpg', 'jpeg', 'png', 'webp']
-            return (
-              <div key={i} className="rounded-xl overflow-hidden border border-gray-200 bg-gray-100">
-                <picture>
-                  {exts.map(ext => (
-                    <source key={ext} srcSet={`${base}.${ext}`} type={`image/${ext === 'jpg' ? 'jpeg' : ext}`} />
-                  ))}
-                  <img
-                    src={`${base}.jpg`}
-                    alt={`ASPECTS nivel ${i + 1}`}
-                    className="w-full object-contain"
-                    onError={(e) => {
-                      e.target.style.display = 'none'
-                      e.target.parentElement.querySelector('.placeholder')?.classList.remove('hidden')
-                    }}
-                  />
-                </picture>
-                <div className="placeholder hidden p-6 text-center text-xs text-gray-400">
-                  Imagen pendiente — subir Aspect{i + 1} a /public
-                </div>
+        <div className="space-y-3">
+          {[
+            { src: '/Basalganglia.png',  label: 'Nivel de ganglios basales' },
+            { src: '/Coronaradiata.png', label: 'Nivel de corona radiata (supraganglionar)' },
+          ].map((img) => (
+            <div key={img.src}>
+              <p className="text-xs text-gray-500 font-medium mb-1">{img.label}</p>
+              <div className="rounded-xl overflow-hidden border border-gray-200 bg-gray-100">
+                <img
+                  src={img.src}
+                  alt={img.label}
+                  className="w-full object-contain"
+                />
               </div>
-            )
-          })}
+            </div>
+          ))}
         </div>
       </SlideCard>
 
