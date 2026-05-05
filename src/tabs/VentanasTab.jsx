@@ -32,7 +32,7 @@ export default function VentanasTab() {
               <div className="grid sm:grid-cols-2 gap-3 text-sm">
                 <div>
                   <span className="text-xs uppercase tracking-wide text-gray-400 font-medium">Ventana</span>
-                  <p className="font-semibold text-gray-900">{v.inicio}–{v.fin} horas</p>
+                  <p className="font-semibold text-gray-900">{v.ventanaTexto || `${v.inicio}–${v.fin} horas`}</p>
                   <p className="mt-1 text-gray-600">
                     {v.descripcionPartes
                       ? v.descripcionPartes.map((p, j) =>
