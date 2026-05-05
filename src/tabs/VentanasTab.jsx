@@ -33,8 +33,15 @@ export default function VentanasTab() {
                 <div>
                   <span className="text-xs uppercase tracking-wide text-gray-400 font-medium">Ventana</span>
                   <p className="font-semibold text-gray-900">{v.inicio}–{v.fin} horas</p>
-                  <p className={`mt-1 ${v.tachadoDescripcion ? 'line-through text-gray-400' : 'text-gray-600'}`}>
-                    {v.descripcion}
+                  <p className="mt-1 text-gray-600">
+                    {v.descripcionPartes
+                      ? v.descripcionPartes.map((p, j) =>
+                          p.tachado
+                            ? <s key={j} className="text-gray-400">{p.texto}</s>
+                            : <span key={j}>{p.texto}</span>
+                        )
+                      : <span className={v.tachadoDescripcion ? 'line-through text-gray-400' : ''}>{v.descripcion}</span>
+                    }
                   </p>
                 </div>
                 <div>
