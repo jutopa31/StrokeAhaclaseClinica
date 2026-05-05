@@ -63,13 +63,13 @@ export default function AspectsTab() {
 
       {/* Imágenes */}
       <SlideCard accent="gray" title="Regiones del ASPECTS en TC">
-        <div className="space-y-3">
+        <div className="grid grid-cols-2 gap-3">
           {[
-            { src: '/Basalganglia.png',  label: 'Nivel de ganglios basales' },
-            { src: '/Coronaradiata.png', label: 'Nivel de corona radiata (supraganglionar)' },
+            { src: '/Basalganglia.png',  label: 'Ganglios basales' },
+            { src: '/Coronaradiata.png', label: 'Corona radiata' },
           ].map((img) => (
             <div key={img.src}>
-              <p className="text-xs text-gray-500 font-medium mb-1">{img.label}</p>
+              <p className="text-xs text-gray-500 font-medium mb-1 text-center">{img.label}</p>
               <div className="rounded-xl overflow-hidden border border-gray-200 bg-gray-100">
                 <img
                   src={img.src}
