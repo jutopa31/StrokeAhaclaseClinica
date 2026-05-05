@@ -19,6 +19,7 @@ export const ventanas = [
     meta:'Definido por imagen, no solo por tiempo',
     tachadoCondicion: true, tachadoMeta: true,
     condicionNueva: 'OGV + ASPECT mayor a 2',
+    cita:'En pacientes con ACV isquémico agudo por OGV proximal de circulación anterior (ACI intracraneal o ACM M1), que se presentan entre 6 y 24 horas desde el inicio de síntomas, con NIHSS ≥ 6, mRS previo 0–1 y ASPECT ≥ 6, se recomienda la trombectomía mecánica para mejorar los desenlaces funcionales y reducir la mortalidad.',
     referencia:'AHA 2026 — Clase I, Nivel A' },
 ]
 
