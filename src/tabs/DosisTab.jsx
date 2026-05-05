@@ -168,71 +168,69 @@ export default function DosisTab() {
       <div className="pt-2">
         <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Cuidados post-trombolisis</p>
 
-        {/* TA */}
-        <SlideCard accent="red" title="Monitoreo de tensión arterial">
-          <p className="text-xs text-gray-500 mb-3">Meta: TA &lt; 180/105 mmHg durante las primeras 24 horas</p>
-          <div className="space-y-2">
+        <div className="grid grid-cols-2 gap-3">
+
+          {/* TA */}
+          <div className="bg-white rounded-xl border border-l-4 border-red-400 p-3 shadow-sm">
+            <p className="text-xs font-semibold text-red-600 mb-2">Tensión arterial</p>
+            <p className="text-xs text-gray-400 mb-2">Meta &lt; 180/105 mmHg · 24 hs</p>
             {monitoreoTA.map((m) => (
-              <div key={m.tiempo} className="flex items-center gap-3 bg-gray-50 rounded-lg px-3 py-2.5">
-                <span className="text-xs font-mono font-bold text-red-600 w-16 flex-shrink-0">{m.tiempo}</span>
-                <span className="text-sm font-semibold text-gray-800 flex-1">{m.frecuencia}</span>
-                <span className="text-xs text-gray-400 text-right hidden sm:block">{m.nota}</span>
+              <div key={m.tiempo} className="flex justify-between items-center py-1 border-b border-gray-50 last:border-0">
+                <span className="text-xs font-mono text-red-500">{m.tiempo}</span>
+                <span className="text-xs font-bold text-gray-700">{m.frecuencia}</span>
               </div>
             ))}
+            <p className="text-xs text-red-600 mt-2 leading-tight">Si &gt; 180/105: nicardipina IV o labetalol IV</p>
           </div>
-          <AlertBox type="red" text="Si TA > 180/105 mmHg: nicardipina IV 5 mg/h o labetalol IV 10 mg. No usar nitroprusiato." />
-        </SlideCard>
 
-        {/* NIHSS */}
-        <SlideCard accent="orange" title="Evaluación neurológica — NIHSS" className="mt-3">
-          <div className="space-y-2">
+          {/* NIHSS */}
+          <div className="bg-white rounded-xl border border-l-4 border-orange-400 p-3 shadow-sm">
+            <p className="text-xs font-semibold text-orange-600 mb-2">NIHSS</p>
             {monitoreoNIHSS.map((n) => (
-              <div key={n.momento} className="flex items-start gap-3 bg-gray-50 rounded-lg px-3 py-2.5">
-                <span className={`mt-0.5 w-2 h-2 rounded-full flex-shrink-0 ${n.momento.includes('deterioro') ? 'bg-red-500' : 'bg-orange-400'}`} />
-                <div>
-                  <p className={`text-sm font-semibold ${n.momento.includes('deterioro') ? 'text-red-700' : 'text-gray-800'}`}>{n.momento}</p>
-                  <p className="text-xs text-gray-400">{n.detalle}</p>
-                </div>
+              <div key={n.momento} className="flex items-start gap-1.5 py-1 border-b border-gray-50 last:border-0">
+                <span className={`mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 ${n.momento.includes('deterioro') ? 'bg-red-500' : 'bg-orange-400'}`} />
+                <span className={`text-xs leading-tight ${n.momento.includes('deterioro') ? 'text-red-600 font-semibold' : 'text-gray-700'}`}>
+                  {n.momento}
+                </span>
               </div>
             ))}
           </div>
-        </SlideCard>
 
-        {/* Neuroimagen */}
-        <SlideCard accent="blue" title="Neuroimagen de control" className="mt-3">
-          <div className="space-y-2">
-            {[
-              { tipo: 'TC a las 24 horas', detalle: 'Rutina — excluir transformación hemorrágica antes de iniciar antiagregantes', urgente: false },
-              { tipo: 'TC inmediata', detalle: 'Ante deterioro neurológico agudo — descartar hemorragia intracraneal sintomática', urgente: true },
-            ].map((item) => (
-              <div key={item.tipo} className={`rounded-lg px-3 py-3 border ${item.urgente ? 'bg-red-50 border-red-200' : 'bg-blue-50 border-blue-200'}`}>
-                <p className={`text-sm font-semibold ${item.urgente ? 'text-red-800' : 'text-blue-800'}`}>
-                  {item.urgente ? '🚨 ' : '📅 '}{item.tipo}
-                </p>
-                <p className={`text-xs mt-0.5 ${item.urgente ? 'text-red-700' : 'text-blue-700'}`}>{item.detalle}</p>
+          {/* Neuroimagen */}
+          <div className="bg-white rounded-xl border border-l-4 border-blue-400 p-3 shadow-sm">
+            <p className="text-xs font-semibold text-blue-600 mb-2">Neuroimagen</p>
+            <div className="space-y-2">
+              <div>
+                <p className="text-xs font-bold text-gray-700">📅 TC a las 24 hs</p>
+                <p className="text-xs text-gray-500 leading-tight">Rutina — excluir transformación hemorrágica antes de antiagregantes</p>
               </div>
-            ))}
+              <div>
+                <p className="text-xs font-bold text-red-700">🚨 TC inmediata</p>
+                <p className="text-xs text-gray-500 leading-tight">Ante deterioro neurológico agudo</p>
+              </div>
+            </div>
           </div>
-          <p className="text-xs text-gray-400 mt-3">No iniciar antiagregantes ni anticoagulantes en las primeras 24 horas post-trombolisis.</p>
-        </SlideCard>
 
-        {/* Restricciones */}
-        <SlideCard accent="gray" title="Restricciones durante las primeras 24 horas" className="mt-3">
-          <ul className="space-y-1.5">
-            {[
-              'No punciones arteriales (femoral, radial, subclavia)',
-              'No colocar SNG ni sonda vesical (salvo indicación estricta)',
-              'No anticoagulación ni antiagregación',
-              'No procedimientos invasivos',
-              'Monitoreo continuo en unidad de stroke o UCI',
-            ].map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
-                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-gray-400 flex-shrink-0" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </SlideCard>
+          {/* Restricciones */}
+          <div className="bg-white rounded-xl border border-l-4 border-gray-400 p-3 shadow-sm">
+            <p className="text-xs font-semibold text-gray-600 mb-2">Restricciones 24 hs</p>
+            <ul className="space-y-1.5">
+              {[
+                'Sin punciones arteriales',
+                'Sin SNG ni sonda vesical',
+                'Sin anticoagulación/antiagregación',
+                'Sin procedimientos invasivos',
+                'Monitoreo en stroke unit / UCI',
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-1.5 text-xs text-gray-700">
+                  <span className="mt-1 w-1 h-1 rounded-full bg-gray-400 flex-shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+        </div>
       </div>
     </div>
   )
