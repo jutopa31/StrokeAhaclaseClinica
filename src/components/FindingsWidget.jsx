@@ -70,8 +70,8 @@ function FindingCard({ finding }) {
       </div>
 
       {finding.videoUrl !== undefined && (
-        <Modal open={videoOpen} onClose={() => setVideoOpen(false)} title={finding.videoTitle || finding.label}>
-          <VideoEmbed url={finding.videoUrl} title={finding.videoTitle} />
+        <Modal open={videoOpen} onClose={() => setVideoOpen(false)} title="">
+          <VideoEmbed url={finding.videoUrl} />
         </Modal>
       )}
     </>

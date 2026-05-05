@@ -20,11 +20,11 @@ export default function Modal({ open, onClose, title, children }) {
         className="bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[85vh] flex flex-col animate-slide-up"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 flex-shrink-0">
-          <h2 className="font-display text-lg text-gray-800">{title}</h2>
+        <div className={`flex items-center justify-between px-5 py-3 flex-shrink-0 ${title ? 'border-b border-gray-100' : ''}`}>
+          {title && <h2 className="font-display text-lg text-gray-800">{title}</h2>}
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+            className="ml-auto p-1 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
           >
             <X size={18} />
           </button>
