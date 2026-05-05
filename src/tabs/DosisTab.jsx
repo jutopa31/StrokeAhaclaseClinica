@@ -1,7 +1,22 @@
 import { useState } from 'react'
 import SectionHeader from '../components/SectionHeader.jsx'
 import SlideCard from '../components/SlideCard.jsx'
+import AlertBox from '../components/AlertBox.jsx'
 import { RotateCcw, Minus, Plus } from 'lucide-react'
+
+const monitoreoTA = [
+  { tiempo: '0 – 2 hs',   frecuencia: 'Cada 15 min', nota: 'Durante la infusión del trombolítico' },
+  { tiempo: '2 – 8 hs',   frecuencia: 'Cada 30 min', nota: 'Primeras horas post-infusión' },
+  { tiempo: '8 – 24 hs',  frecuencia: 'Cada 60 min', nota: 'Hasta completar las 24 horas' },
+]
+
+const monitoreoNIHSS = [
+  { momento: 'Al finalizar la infusión',  detalle: '60 minutos post-inicio' },
+  { momento: 'A las 2 horas',             detalle: 'Post-inicio del trombolítico' },
+  { momento: 'A las 6 horas',             detalle: 'Control intermedio' },
+  { momento: 'A las 24 horas',            detalle: 'Previo a neuroimagen de control' },
+  { momento: 'Ante cualquier deterioro',  detalle: 'Evaluación inmediata — activar protocolo de hemorragia' },
+]
 
 const RTPA_DOSE   = 0.9
 const RTPA_MAX    = 90
@@ -148,6 +163,77 @@ export default function DosisTab() {
       >
         <RotateCcw size={14} /> Restablecer a 70 kg
       </button>
+
+      {/* Post-trombolisis */}
+      <div className="pt-2">
+        <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Cuidados post-trombolisis</p>
+
+        {/* TA */}
+        <SlideCard accent="red" title="Monitoreo de tensión arterial">
+          <p className="text-xs text-gray-500 mb-3">Meta: TA &lt; 180/105 mmHg durante las primeras 24 horas</p>
+          <div className="space-y-2">
+            {monitoreoTA.map((m) => (
+              <div key={m.tiempo} className="flex items-center gap-3 bg-gray-50 rounded-lg px-3 py-2.5">
+                <span className="text-xs font-mono font-bold text-red-600 w-16 flex-shrink-0">{m.tiempo}</span>
+                <span className="text-sm font-semibold text-gray-800 flex-1">{m.frecuencia}</span>
+                <span className="text-xs text-gray-400 text-right hidden sm:block">{m.nota}</span>
+              </div>
+            ))}
+          </div>
+          <AlertBox type="red" text="Si TA > 180/105 mmHg: nicardipina IV 5 mg/h o labetalol IV 10 mg. No usar nitroprusiato." />
+        </SlideCard>
+
+        {/* NIHSS */}
+        <SlideCard accent="orange" title="Evaluación neurológica — NIHSS" className="mt-3">
+          <div className="space-y-2">
+            {monitoreoNIHSS.map((n) => (
+              <div key={n.momento} className="flex items-start gap-3 bg-gray-50 rounded-lg px-3 py-2.5">
+                <span className={`mt-0.5 w-2 h-2 rounded-full flex-shrink-0 ${n.momento.includes('deterioro') ? 'bg-red-500' : 'bg-orange-400'}`} />
+                <div>
+                  <p className={`text-sm font-semibold ${n.momento.includes('deterioro') ? 'text-red-700' : 'text-gray-800'}`}>{n.momento}</p>
+                  <p className="text-xs text-gray-400">{n.detalle}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </SlideCard>
+
+        {/* Neuroimagen */}
+        <SlideCard accent="blue" title="Neuroimagen de control" className="mt-3">
+          <div className="space-y-2">
+            {[
+              { tipo: 'TC a las 24 horas', detalle: 'Rutina — excluir transformación hemorrágica antes de iniciar antiagregantes', urgente: false },
+              { tipo: 'TC inmediata', detalle: 'Ante deterioro neurológico agudo — descartar hemorragia intracraneal sintomática', urgente: true },
+            ].map((item) => (
+              <div key={item.tipo} className={`rounded-lg px-3 py-3 border ${item.urgente ? 'bg-red-50 border-red-200' : 'bg-blue-50 border-blue-200'}`}>
+                <p className={`text-sm font-semibold ${item.urgente ? 'text-red-800' : 'text-blue-800'}`}>
+                  {item.urgente ? '🚨 ' : '📅 '}{item.tipo}
+                </p>
+                <p className={`text-xs mt-0.5 ${item.urgente ? 'text-red-700' : 'text-blue-700'}`}>{item.detalle}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-gray-400 mt-3">No iniciar antiagregantes ni anticoagulantes en las primeras 24 horas post-trombolisis.</p>
+        </SlideCard>
+
+        {/* Restricciones */}
+        <SlideCard accent="gray" title="Restricciones durante las primeras 24 horas" className="mt-3">
+          <ul className="space-y-1.5">
+            {[
+              'No punciones arteriales (femoral, radial, subclavia)',
+              'No colocar SNG ni sonda vesical (salvo indicación estricta)',
+              'No anticoagulación ni antiagregación',
+              'No procedimientos invasivos',
+              'Monitoreo continuo en unidad de stroke o UCI',
+            ].map((item, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-gray-400 flex-shrink-0" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </SlideCard>
+      </div>
     </div>
   )
 }
