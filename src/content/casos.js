@@ -219,7 +219,7 @@ export const casos = [
             status: 'Revisar',
             statusColor: 'orange',
             detail: ['Hiperdensidad espontánea en ACM izquierda — signo de la cuerda.', 'Signo indirecto de trombosis de gran vaso. Sin hemorragia franca.'],
-            videoUrl: '',
+            videoUrl: '/Celestedelvalle1.mp4',
             videoTitle: 'TAC de cerebro — Signo de la cuerda',
           },
           {
@@ -325,7 +325,7 @@ export const casos = [
             status: 'Sin hemorragia',
             statusColor: 'orange',
             detail: ['Isquemia previa hemisferio izquierdo. Sin transformación hemorrágica.', 'ASPECT > 2 — extensión isquémica no contraindica trombectomía.'],
-            videoUrl: '',
+            videoUrl: '/Celestedelvalle2.mp4',
             videoTitle: 'TAC de cerebro — Caso 3',
           },
           {
