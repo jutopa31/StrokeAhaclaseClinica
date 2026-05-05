@@ -178,9 +178,9 @@ export const casos = [
             feedback: 'Correcto. Son los dos primeros parámetros a obtener: la glucemia descarta hipoglucemia como causa del foco, y la TA determina si puede administrarse trombolítico.',
           },
           {
-            label: 'TC de cerebro sin contraste + angio-TC en el mismo tiempo',
+            label: 'TC de cerebro sin contraste (primera imagen) + angio-TC si NIHSS ≥ 6',
             cumple: true,
-            feedback: 'Correcto. La TC sin contraste excluye hemorragia y la angio-TC pesquisa OGV. Ambos se piden juntos — el error más frecuente es olvidar la angio-TC.',
+            feedback: 'Correcto. La TC sin contraste es prioritaria: excluye hemorragia y habilita trombólisis. Si NIHSS ≥ 6, agregar angio-TC para evaluar oclusión de gran vaso — puede pedirse en paralelo pero no debe demorar ni reemplazar la TC simple.',
           },
           {
             label: 'Evaluar si los síntomas son discapacitantes',

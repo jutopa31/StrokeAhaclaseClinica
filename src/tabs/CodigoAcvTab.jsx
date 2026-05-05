@@ -40,7 +40,6 @@ export default function CodigoAcvTab() {
           La HTA en ACV isquémico es generalmente <strong>protectora</strong>. No tratar salvo situaciones específicas.
         </p>
         <ClinicalTable headers={tensionArterial[0]} rows={tensionArterial.slice(1)} />
-        <AlertBox type="red" title="Error frecuente" text="Administrar captopril SL o antihipertensivos sin indicación del equipo de stroke puede agravar la isquemia al reducir la perfusión del tejido en riesgo." />
       </SlideCard>
     </div>
   )
