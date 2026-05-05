@@ -4,6 +4,8 @@ import VideoEmbed from './VideoEmbed.jsx'
 import ChoiceWidget from './ChoiceWidget.jsx'
 import ChecklistWidget from './ChecklistWidget.jsx'
 import FindingsWidget from './FindingsWidget.jsx'
+import YesNoWidget from './YesNoWidget.jsx'
+import RevealChecklistWidget from './RevealChecklistWidget.jsx'
 
 const stepConfig = {
   info:      { bg:'bg-blue-50',   border:'border-blue-300',   label:'Información',       dot:'bg-blue-500'    },
@@ -16,6 +18,8 @@ const stepConfig = {
   choice:    { bg:'bg-orange-50', border:'border-orange-200', label:'Opción múltiple',   dot:'bg-orange-500'  },
   checklist: { bg:'bg-blue-50',   border:'border-blue-200',   label:'Checklist',         dot:'bg-blue-500'    },
   findings:  { bg:'bg-amber-50',  border:'border-amber-300',  label:'Estudios',           dot:'bg-amber-500'   },
+  yesno:          { bg:'bg-orange-50', border:'border-orange-200', label:'Decisión clínica',   dot:'bg-orange-500'  },
+  'reveal-checklist': { bg:'bg-blue-50', border:'border-blue-200', label:'Checklist',         dot:'bg-blue-500'    },
 }
 
 function Step({ step, index }) {
@@ -73,6 +77,32 @@ function Step({ step, index }) {
           <span className="text-xs text-gray-400">Paso {index + 1}</span>
         </div>
         <FindingsWidget findings={step.findings} title={step.title} />
+      </div>
+    )
+  }
+
+  if (step.type === 'reveal-checklist') {
+    return (
+      <div className="animate-slide-up">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-xs text-gray-400">Paso {index + 1}</span>
+        </div>
+        <RevealChecklistWidget title={step.title} items={step.items} />
+      </div>
+    )
+  }
+
+  if (step.type === 'yesno') {
+    return (
+      <div className="animate-slide-up">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-xs text-gray-400">Paso {index + 1}</span>
+        </div>
+        <YesNoWidget
+          title={step.title}
+          noFeedback={step.noFeedback}
+          subQuestions={step.subQuestions || []}
+        />
       </div>
     )
   }
@@ -139,6 +169,8 @@ function isPlaceholder(step) {
   if (step.type === 'choice') return false
   if (step.type === 'checklist') return false
   if (step.type === 'findings') return false
+  if (step.type === 'yesno') return false
+  if (step.type === 'reveal-checklist') return false
   const text = Array.isArray(step.content) ? step.content[0] : step.content
   return text?.toString().startsWith('(Completar')
 }

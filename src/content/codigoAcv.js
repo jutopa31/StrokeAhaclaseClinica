@@ -1,6 +1,6 @@
 export const protocolSteps = [
   { id:1, time:'0 min', title:'Activar Código ACV',
-    items:['Déficit neurológico focal súbito → activar el código sin esperar confirmación diagnóstica','Llamar a neurología en paralelo — no después del tomógrafo','Acceso venoso calibre 18 o 20 inmediato','Glucemia capilar inmediata'],
+    items:['Déficit neurológico focal súbito → activar el código sin esperar confirmación diagnóstica','Llamar a neurología en paralelo — no después del tomógrafo','Acceso venoso calibre 18 o 20 inmediato (x2)','Glucemia capilar inmediata'],
     alert:{ type:'red', text:'No esperar al neurólogo para activar el código' }},
   { id:2, time:'0–2 min', title:'La pregunta más importante',
     items:['¿A qué hora lo vieron neurológicamente normal por última vez?','Preguntar al familiar, al testigo, al vecino — quien esté disponible','ACV del despertar: el inicio es cuando se durmió asintomático, no cuando lo encontraron','Documentar: "Último visto normal: HH:MM hs" — no "hace un rato"'],
@@ -18,8 +18,8 @@ export const protocolSteps = [
     items:['Ajustar TA si > 185/110 mmHg antes de administrar (nicardipina o labetalol IV)','rtPA: 0.9 mg/kg IV (máx 90 mg) — 10% bolo, 90% en 60 min','TNK: 0.25 mg/kg IV (máx 25 mg) — bolo único en 5–10 segundos','Durante infusión: TA cada 15 min, sin punciones arteriales, sin SNG ni sonda vesical'],
     alert:{ type:'green', text:'Meta internacional: door-to-needle ≤ 60 minutos desde el ingreso' }},
   { id:7, time:'≤ 90 min', title:'Derivación para trombectomía',
-    items:['Si hay oclusión de gran vaso y el centro no tiene hemodinamia neurológica','Llamar directamente al equipo de stroke intervencionista del centro receptor','Enviar imágenes digitalmente antes de que salga la ambulancia','DIDO (door-in door-out): meta ≤ 60 minutos desde el ingreso'],
-    alert:{ type:'orange', text:'DIDO ≤ 60 min — meta de calidad AHA 2026' }},
+    items:['Si hay oclusión de gran vaso y el centro no tiene hemodinamia neurológica','Llamar directamente al equipo de stroke intervencionista del centro receptor','Enviar imágenes digitalmente antes de que salga la ambulancia'],
+    alert:null },
 ]
 
 export const tensionArterial = [

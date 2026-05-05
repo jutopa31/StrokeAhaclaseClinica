@@ -9,11 +9,13 @@ export const ventanas = [
     condicion:'Carótida interna intracraneal, ACM M1/M2, arteria basilar',
     meta:'Door-to-puncture ≤ 90 min desde el ingreso',
     referencia:'AHA 2026 — Clase I, Nivel A' },
-  { nombre:'Trombectomía — ventana extendida', inicio:6, fin:24, color:'yellow',
+  { nombre:'Trombectomía — ventana extendida', tachado:'extendida', inicio:0, fin:24, color:'yellow',
     descripcion:'Selección por imagen: TC perfusión o RMN-DWI',
     condicion:'Estudios DAWN y DEFUSE-3: mismatch clínico-imagen favorable',
     meta:'Definido por imagen, no solo por tiempo',
-    referencia:'AHA 2026 — Clase I, Nivel A (DAWN / DEFUSE-3)' },
+    tachadoDescripcion: true, tachadoCondicion: true, tachadoMeta: true,
+    condicionNueva: 'OGV + ASPECT mayor a 2',
+    referencia:'AHA 2026 — Clase I, Nivel A' },
 ]
 
 export const mensajesVentanas = [
