@@ -3,6 +3,7 @@ import TabBar from './components/TabBar.jsx'
 import InicioTab from './tabs/InicioTab.jsx'
 import NihssTab from './tabs/NihssTab.jsx'
 import CodigoAcvTab from './tabs/CodigoAcvTab.jsx'
+import AspectsTab from './tabs/AspectsTab.jsx'
 import VentanasTab from './tabs/VentanasTab.jsx'
 import ContraindicacionesTab from './tabs/ContraindicacionesTab.jsx'
 import DosisTab from './tabs/DosisTab.jsx'
@@ -14,6 +15,7 @@ const staticTabs = [
   { id:'inicio',   path:'/inicio',   label:'Inicio',          shortLabel:'Inicio'    },
   { id:'codigo',   path:'/codigo',   label:'Código ACV',      shortLabel:'Código'    },
   { id:'nihss',    path:'/nihss',    label:'NIHSS',           shortLabel:'NIHSS'     },
+  { id:'aspects',  path:'/aspects',  label:'ASPECTS',         shortLabel:'ASPECTS'   },
   { id:'ventanas', path:'/ventanas', label:'Ventanas',        shortLabel:'Ventanas'  },
   { id:'contra',   path:'/contra',   label:'Contraindicaciones', shortLabel:'Contrain.' },
   { id:'dosis',    path:'/dosis',    label:'Calculadora dosis',  shortLabel:'Dosis'     },
@@ -53,6 +55,7 @@ export default function App() {
             <Route path="/inicio"   element={<InicioTab />} />
             <Route path="/nihss"    element={<NihssTab />} />
             <Route path="/codigo"   element={<CodigoAcvTab />} />
+            <Route path="/aspects"  element={<AspectsTab />} />
             <Route path="/ventanas" element={<VentanasTab />} />
             <Route path="/contra"   element={<ContraindicacionesTab />} />
             <Route path="/dosis"    element={<DosisTab />} />
