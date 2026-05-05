@@ -63,6 +63,11 @@ export default function VentanasTab() {
                   {v.cita}
                 </p>
               )}
+              {v.cita2 && (
+                <p className="mt-2 text-xs text-gray-500 italic leading-relaxed">
+                  {v.cita2}
+                </p>
+              )}
             </SlideCard>
           )
         })}
