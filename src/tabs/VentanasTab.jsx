@@ -51,6 +51,11 @@ export default function VentanasTab() {
                   <p className="text-xs text-gray-400">{v.referencia}</p>
                 </div>
               </div>
+              {v.cita && (
+                <p className="mt-3 pt-3 border-t border-gray-100 text-xs text-gray-500 italic leading-relaxed">
+                  {v.cita}
+                </p>
+              )}
             </SlideCard>
           )
         })}
